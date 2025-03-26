@@ -464,10 +464,9 @@
     
     <!-- 2. 建立 Modal（影片全螢幕） -->
     <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel">播放影片</h5>
+                <div class="modal-header" style="max-height: 1%">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">
@@ -500,17 +499,15 @@
             let modal = new bootstrap.Modal(modalElement);
 
             videoElement.src = url;  // **先設定影片來源**
-            videoElement.autoplay = true;
-            videoElement.muted = true;  // **先靜音確保瀏覽器允許播放**
 
             // **顯示 Modal**
             modal.show();
-            /*確保使用者點了Btn
+            //確保使用者點了Btn
             videoElement.play().catch(error => {
                 console.log("播放失敗，嘗試喚醒 AudioContext", error);
                 videoElement.muted = true; // **靜音模式強制播放**
                 videoElement.play();
-            });*/
+            });
         }
         function StopVideo() {
                 let videoModal = document.getElementById("videoModal");
