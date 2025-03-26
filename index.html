@@ -518,18 +518,13 @@
         return;
     }
 
-    // 檢查影片是否正在播放
-    if (!videoElement.paused) {
-        // 強制關閉 Modal
-        let modalInstance = bootstrap.Modal.getInstance(videoModal);
-        if (modalInstance) {
-            modalInstance.hide();
-        } else {
-            console.error("找不到 Modal 實例，無法關閉 Modal");
-        }
-    } else {
-        console.log("影片沒有播放，不執行停止操作");
-    }
+     // 強制關閉 Modal
+    let modal = new bootstrap.Modal(videoModal);
+    modal.hide();
+    console.log("Modal 已強制關閉");
+    videoElement.pause();
+    videoElement.src = ""; // 清空影片來源
+    console.log("影片已強制停止");
 }
     
     
