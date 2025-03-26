@@ -512,25 +512,23 @@
         function StopVideo() {
     let videoModal = document.getElementById("videoModal");
     let videoElement = document.getElementById("videoPlayer");
-    // 強制關閉 Modal
-    let modal = new bootstrap.Modal(videoModal);
-    modal.hide();
+
     if (!videoModal || !videoElement) {
         console.error("找不到 videoModal 或 videoPlayer");
         return;
     }
-     let modalInstance = bootstrap.Modal.getInstance(videoModal);
-        
-        if (modalInstance) {
-            modalInstance.hide();  // 隱藏 Modal
-        } else {
-            // 如果 Modal 尚未被初始化，則強制初始化並隱藏
-            modalInstance = new bootstrap.Modal(videoModal);
-            modalInstance.hide();
-        }
-    console.log("Modal 已強制關閉");
+let modalInstance = bootstrap.Modal.getInstance(videoModal);
+    
+    if (modalInstance) {
+        modalInstance.hide();  // 隱藏 Modal
+    } else {
+        // 如果 Modal 尚未被初始化，則強制初始化並隱藏
+        modalInstance = new bootstrap.Modal(videoModal);
+        modalInstance.hide();
+    }
+
+   
     videoElement.pause();
-    videoElement.src = ""; // 清空影片來源
     console.log("影片已強制停止");
 }
     
