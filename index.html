@@ -510,28 +510,32 @@
             });
         }
         function StopVideo() {
-            let videoModal = document.getElementById("videoModal");
-            let videoElement = document.getElementById("videoPlayer");
-    
-            if (!videoModal || !videoElement) {
-                console.error("找不到 videoModal 或 videoPlayer");
-                return;
-            }
-    
-            // 檢查影片是否正在播放
-            if (!videoElement.paused) {
-                // 強制關閉 Modal
-                let modalInstance = bootstrap.Modal.getInstance(videoModal) || new bootstrap.Modal(videoModal);
-                modalInstance.hide();
-    
-                // 停止影片播放
-                videoElement.pause();
-                videoElement.src = ""; // 清空影片來源
-                console.log("影片已強制停止，Modal 已關閉");
-            } else {
-                console.log("影片沒有播放，不執行停止操作");
-            }
+    let videoModal = document.getElementById("videoModal");
+    let videoElement = document.getElementById("videoPlayer");
+
+    if (!videoModal || !videoElement) {
+        console.error("找不到 videoModal 或 videoPlayer");
+        return;
+    }
+
+    // 檢查影片是否正在播放
+    if (!videoElement.paused) {
+        // 強制關閉 Modal
+        let modalInstance = bootstrap.Modal.getInstance(videoModal);
+        if (modalInstance) {
+            modalInstance.hide();
+        } else {
+            console.error("找不到 Modal 實例，無法關閉 Modal");
         }
+
+        // 停止影片播放
+        videoElement.pause();
+        videoElement.src = ""; // 清空影片來源
+        console.log("影片已強制停止，Modal 已關閉");
+    } else {
+        console.log("影片沒有播放，不執行停止操作");
+    }
+}
     
     
     </script>
