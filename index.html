@@ -502,12 +502,7 @@
     
             // **顯示 Modal**
             modal.show();
-            //確保使用者點了Btn
-            videoElement.play().catch(error => {
-                console.log("播放失敗，嘗試喚醒 AudioContext", error);
-                videoElement.muted = true; // **靜音模式強制播放**
                 videoElement.play();
-            });
         }
         function StopVideo() {
             let videoModal = document.getElementById("videoModal");
