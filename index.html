@@ -527,11 +527,6 @@
         } else {
             console.error("找不到 Modal 實例，無法關閉 Modal");
         }
-
-        // 停止影片播放
-        videoElement.pause();
-        videoElement.src = ""; // 清空影片來源
-        console.log("影片已強制停止，Modal 已關閉");
     } else {
         console.log("影片沒有播放，不執行停止操作");
     }
