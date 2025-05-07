@@ -139,9 +139,9 @@
         const buildUrl = "Build";
         const loaderUrl = buildUrl + "/VR.loader.js";
         const config = {
-            dataUrl: buildUrl + "/ae50dedb9c1265ff7b9af79c055030c8.data.unityweb",
-            frameworkUrl: buildUrl + "/1592a4b9754a2b9475e8ffaf8627eb54.js.unityweb",
-            codeUrl: buildUrl + "/02d2a9a0efd16d68fb809a9a5a0fbec2.wasm.unityweb",
+            dataUrl: buildUrl + "/1ee9f8e806f312c00e50bda60e3b6297.data.unityweb",
+            frameworkUrl: buildUrl + "/48fbabac223439e3c2ddae640dfaf86f.js.unityweb",
+            codeUrl: buildUrl + "/ef45d94d45e6963290029eb91c7bb539.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
             companyName: "DefaultCompany",
             productName: "climate_Project_",
@@ -257,7 +257,7 @@
        
            window.SendInfo = function (message) {
                
-               fetch("questionData.xlsx?t=" + new Date().getTime()) // 加入時間戳記，避免快取
+               fetch("questionData.xlsx?t=" + new Date().getTime()) 
                    .then(response => response.arrayBuffer())
                    .then(data => {
                        let workbook = XLSX.read(data, { type: "array" });
@@ -274,7 +274,7 @@
    
                        let rawData = XLSX.utils.sheet_to_json(worksheet, { raw: true });
                        let jsonData = rawData.map(row => {
-                   // 有 B、C、D 全部存在 → 回傳完整選項
+                   // 有A、 B、C 全部存在 → 回傳完整選項
                    if (row.optionB && row.optionC ) {
                        return {
                            question: row.question,
@@ -423,7 +423,7 @@
            let Btn4 = [];
            let btnDict = {};
            window.fetchBtn = function () {
-               console.log("111");
+               //console.log("111");
                fetch("questionData.xlsx?t=" + new Date().getTime()) // 加入時間戳記，避免快取
                    .then(response => response.arrayBuffer())
                    .then(data => {
@@ -447,14 +447,17 @@
                            .map(row => row.Button3) // 指定欄位
                            .filter(path => path) // 過濾掉空值
                            .map(path => path.replace(/\\/g, "/"));
-       
-                       if (Btn3.length > 1) {
+                       Btn4 = jsonData
+                           .map(row => row.Button4) // 指定欄位
+                           .filter(path => path) // 過濾掉空值
+                           .map(path => path.replace(/\\/g, "/"));   
+                       if (Btn1.length > 1) {
                            for (let i = 0; i < Scence.length; i++) {
                                btnDict[Scence[i]] = [Btn1[i], Btn2[i], Btn3[i], Btn4[i]];
                            }
                        }
                        console.table(btnDict);
-                       //FindBtnData("Scene3");
+   
                    })
                    .catch(error => console.error("載入按鈕資料失敗", error));
            }
@@ -527,26 +530,26 @@
                });
            }
            function StopVideo() {
-       let videoModal = document.getElementById("videoModal");
-       let videoElement = document.getElementById("videoPlayer");
+               let videoModal = document.getElementById("videoModal");
+               let videoElement = document.getElementById("videoPlayer");
    
-       if (!videoModal || !videoElement) {
-           console.error("找不到 videoModal 或 videoPlayer");
-           return;
-       }
-   let modalInstance = bootstrap.Modal.getInstance(videoModal);
-       
-       if (modalInstance) {
-           modalInstance.hide();  // 隱藏 Modal
-       } else {
-           // 如果 Modal 尚未被初始化，則強制初始化並隱藏
-           modalInstance = new bootstrap.Modal(videoModal);
-           modalInstance.hide();
-       }
+               if (!videoModal || !videoElement) {
+                   console.error("找不到 videoModal 或 videoPlayer");
+                   return;
+               }
+               let modalInstance = bootstrap.Modal.getInstance(videoModal);
+               
+               if (modalInstance) {
+                   modalInstance.hide();  // 隱藏 Modal
+               } else {
+                   // 如果 Modal 尚未被初始化，則強制初始化並隱藏
+                   modalInstance = new bootstrap.Modal(videoModal);
+                   modalInstance.hide();
+               }
    
-      
-       console.log("影片已強制停止");
-   }
+           
+               console.log("影片已強制停止");
+           }
        
        
        </script>
